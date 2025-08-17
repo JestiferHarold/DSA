@@ -1,6 +1,6 @@
-import { Node } from "../../node/ts/Node";
 //@ts-ignore
 import { process } from "node:process";
+import { Node } from "../node/Node";
 
 class Queue {
   private front: Node | null;
