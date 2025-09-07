@@ -1,113 +1,165 @@
-public class SinglyLinkedList {
-  Node head;
-  private int size;
+class Node {
+  int data;
+  Node next;
 
-  class Node {
-    int data;
-    Node next;
-
-    Node(int data) {
-      this.data = data;
-      this.next = null;
-    }
+  Node(int data) {
+    this.data = data;
+    this.next = null;
   }
+}
+
+public class SinglyLinkedList {
+  private Node head;
+  private int size;
 
   public SinglyLinkedList() {
     head = null;
+    size = 0;
   }
 
-  public void AddFront(int data) {
+  public void addFront(int data) {
     Node newNode = new Node(data);
-
-    if (head == null) {
-      head = newNode;
-      size++;
-      return;
-    }
 
     newNode.next = head;
     head = newNode;
     size++;
   }
 
-  public void AddLast(int data) {
+  public void addLast(int data) {
     Node newNode = new Node(data);
 
     if (head == null) {
       head = newNode;
-      return;
+    } else {
+      Node curr = head;
+
+      while (curr.next != null) {
+        curr = curr.next;
+      }
+
+      curr.next = newNode;
     }
 
-    Node currNode = head;
-    while (currNode.next != null) {
-      currNode = currNode.next;
-    }
-
-    currNode.next = newNode;
     size++;
   }
 
-  public boolean Search(int value) {
-    Node currNode = head;
+  public boolean search(int value) {
+    Node curr = head;
 
-    while (currNode != null) {
-      if (currNode.data == value) {
+    while (curr != null) {
+      if (curr.data == value) {
         return true;
       }
-      currNode = currNode.next;
+
+      curr = curr.next;
     }
+
     return false;
   }
 
-  public void PrintList() {
+  public void deleteFirst() {
     if (head == null) {
       System.out.println("List is empty");
       return;
     }
 
-    Node currNode = head;
-
-    while (currNode != null) {
-      System.out.print(currNode.data + "-->");
-      currNode = currNode.next;
-    }
-
-    System.out.println("NULL");
-  }
-
-  public void DeleteFirst() {
-    if (head == null) {
-      System.out.println("List is empty");
-      return;
-    }
-    size--;
     head = head.next;
+    size--;
   }
 
-  public void DeleteLast() {
+  public void deleteLast() {
     if (head == null) {
-      System.out.println("Lsit is empty");
+      System.out.println("List is empty");
       return;
     }
 
     if (head.next == null) {
       head = null;
-      return;
-    }
+    } else {
+      Node curr = head;
 
-    Node secondLast = head;
-    Node lastNode = head.next;
+      while (curr.next.next != null) {
+        curr = curr.next;
+      }
 
-    while (lastNode.next != null) {
-      lastNode = lastNode.next;
-      secondLast = secondLast.next;
+      curr.next = null;
     }
 
     size--;
-    secondLast.next = null;
   }
 
   public int size() {
     return size;
+  }
+
+  public void insertAtIndex(int index, int data) {
+    if (index < 0 || index >= size) {
+      System.out.println("Index should be between 0 and " + (size - 1));
+      return;
+    }
+
+    if (index == 0) {
+      addFront(data);
+      return;
+    }
+
+    Node newNode = new Node(data);
+    Node currNode = head;
+
+    for (int i = 0; i < index - 1; i++) {
+      currNode = currNode.next;
+    }
+
+    newNode.next = currNode.next;
+    currNode.next = newNode;
+    size++;
+  }
+
+  public void deleteAtIndex(int index) {
+    if (index < 0 || index >= size) {
+      System.out.println("Index should be between 0 and " + (size - 1));
+      return;
+    }
+
+    if (index == 0) {
+      deleteFirst();
+      return;
+    }
+
+    Node currNode = head;
+
+    for (int i = 0; i < index - 1; i++) {
+      currNode = currNode.next;
+    }
+
+    currNode.next = currNode.next.next;
+    size--;
+  }
+
+  public void deleteByValue(int value) {
+    if (head == null) {
+      System.out.println("List is empty");
+      return;
+    }
+
+    if (head.data == value) {
+      head = head.next;
+      size--;
+      return;
+    }
+
+    Node currNode = head;
+
+    while (currNode.next != null && currNode.next.data != value) {
+      currNode = currNode.next;
+    }
+
+    if (currNode.next == null) {
+      System.out.println("Value " + value + " is not found in the list");
+      return;
+    }
+
+    currNode.next = currNode.next.next;
+    size--;
   }
 }
