@@ -7,15 +7,15 @@ class Node {
     this.nextNode = nextNode;
   }
 
-  public getValue(): number {
+  getValue(): number {
     return this.value;
   }
 
-  public getNextNode(): Node | null {
+  getNextNode(): Node | null {
     return this.nextNode;
   }
 
-  public setNextNode(nextNode: Node | null): void {
+  setNextNode(nextNode: Node | null): void {
     this.nextNode = nextNode;
   }
 }

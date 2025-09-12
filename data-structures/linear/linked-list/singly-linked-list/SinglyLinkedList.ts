@@ -9,11 +9,11 @@ class SinglyLinkedList {
     this.head = head;
   }
 
-  public getHead(): Node | null {
+  getHead(): Node | null {
     return this.head;
   }
 
-  public getTail(): Node | null {
+  getTail(): Node | null {
     if (this.head == null) return null;
 
     let n: Node | null | undefined = this.head;
@@ -21,7 +21,7 @@ class SinglyLinkedList {
     return n;
   }
 
-  public popFront(): Node | null {
+  popFront(): Node | null {
     if (this.head == null) return null;
 
     let n: Node | null = this.head;
@@ -29,7 +29,7 @@ class SinglyLinkedList {
     return n;
   }
 
-  public popBack(): Node | null {
+  popBack(): Node | null {
     if (this.head == null) return null;
 
     let n: Node | null | undefined = this.head;
@@ -41,19 +41,19 @@ class SinglyLinkedList {
     return temp;
   }
 
-  public pushFront(value: number): void {
+  pushFront(value: number): void {
     let n: Node = new Node(value, this.head);
     this.head = n;
   }
 
-  public pushBack(value: number): void {
+  pushBack(value: number): void {
     let n: Node = new Node(value);
     let m: Node | null = this.head;
     for (; m?.getNextNode() != null; m = m?.getNextNode());
     m?.setNextNode(n);
   }
 
-  public insert(value: number, position: number): void {
+  insert(value: number, position: number): void {
     let n: number = this.size();
     if (position >= n || position < 0) return console.log("invalid postion");
 
@@ -73,7 +73,7 @@ class SinglyLinkedList {
     temp.setNextNode(nod);
   }
 
-  public search(key: number): boolean {
+  search(key: number): boolean {
     if (this.head == null) return false;
 
     let n: Node | null = this.head;
@@ -83,7 +83,7 @@ class SinglyLinkedList {
     return false;
   }
 
-  public printList(): void {
+  printList(): void {
     for (let n: Node | null = this.head; n != null; n = n.getNextNode());
     //@ts-ignore
     process.std.write(`${n.getValue()} ->`);
@@ -91,7 +91,7 @@ class SinglyLinkedList {
     process.std.write("\n");
   }
 
-  public size(): number {
+  size(): number {
     let i: number = 0;
     for (
       let node: Node | null = this.head;
